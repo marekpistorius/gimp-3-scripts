@@ -12,6 +12,7 @@ from gi.repository import Gio
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 import os, sys, string, tempfile, platform
+import subprocess
 
 def N_(message): return message
 def _(message): return GLib.dgettext(None, message)
@@ -82,18 +83,23 @@ class PythonRemoveBG(Gimp.PlugIn):
 
 			AlphaMatting = config.get_property('AlphaMatting')
 			asMask = config.get_property('asMask')
-			selModel  = config.get_choice_id("Model") 		
+			selModel  = config.get_choice_id("Model") 
+			aeValue = config.get_property('aeValue')		
 
 			removeTmpFile = True
-			osName = platform.system()
 
-			exportSep = str(os.sep)
 			tdir = tempfile.gettempdir()
 			print(tdir)
-			jpgFile = "%s%sTemp-gimp-0000.jpg" % (tdir, exportSep)
-			pngFile = "%s%sTemp-gimp-0000.png" % (tdir, exportSep)
+			jpgFileF = "Temp-gimp-0000.jpg"
+			jpgFile = os.path.join(tdir,jpgFileF)
+			
+			pngFileF = "Temp-gimp-0000.png"
+			pngFile = os.path.join(tdir,pngFileF)
+			
+
 			x1 = 0
 			y1 = 0
+
 			option = ""
 			
 			Gimp.context_pop()
@@ -121,11 +127,13 @@ class PythonRemoveBG(Gimp.PlugIn):
 				pdb.gimp_image_delete(tmpImage)
 	
 			aiExe = "C:\\Program Files (x86)\\Rembg\\rembg.exe"
-			
+						
 			if AlphaMatting:
 				option = "-a -ae %d" % (aeValue)
-			cmd = '""%s" i -m %s %s "%s" "%s""' % (aiExe, tupleModel[selModel], option, f.get_path(), pngFile)
-			os.system(cmd)
+			cmd = '%s i -m %s %s "%s" "%s"' % (aiExe, tupleModel[selModel], option, f.get_path(), pngFile)
+			print(cmd)
+
+			subprocess.run(cmd)	
 
 			file_exists = os.path.exists(pngFile)
 			if file_exists:
