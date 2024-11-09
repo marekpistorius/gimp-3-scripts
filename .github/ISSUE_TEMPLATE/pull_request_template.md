@@ -1,1 +1,2 @@
-description of the changes proposed in the pull request.
+- description of the changes proposed in the pull request.
+- sent email at me@maniu.eu
