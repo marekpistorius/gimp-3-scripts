@@ -42,7 +42,7 @@ class PythonRemoveBG(Gimp.PlugIn):
 			procedure.set_menu_label(_("RemoveBG.."))
 			procedure.set_attribution("MP",
 										"(c) GPL V3.0 or later",
-										"2024")
+										"2024-2025")
 			procedure.add_menu_path('<Image>/Filters/RemoveBG/')
 
 			procedure.add_boolean_argument("asMask","as Mask","As mask",False,GObject.ParamFlags.READWRITE)
