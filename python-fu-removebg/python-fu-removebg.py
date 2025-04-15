@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# (C) 2025 Marek Pistorius
+# (C) 2024-2025 Marek Pistorius
 # This file is part of gimp-python-fu-removebg .
 # gimp-python-fu-removebg is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 2 of the License, or (at your option) any later version.
 # gimp-python-fu-removebg is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -50,25 +50,25 @@ class PythonRemoveBG(Gimp.PlugIn):
 			procedure.add_double_argument("aeValue","aeValue","aeValue",0,100,15 ,GObject.ParamFlags.READWRITE)
 
 
-			pchannel_choice = Gimp.Choice.new()
-			pchannel_choice.add("u2net",0,"u2net","")
-			pchannel_choice.add("u2net_human_seg",1,"u2net_human_seg","")
-			pchannel_choice.add("u2net_cloth_seg",2,"u2net_cloth_seg","")
-			pchannel_choice.add("u2netp",3,"u2netp","")
-			pchannel_choice.add("silueta",4,"silueta","")
-			pchannel_choice.add("isnet-general-use",5,"isnet-general-use","")
-			pchannel_choice.add("isnet-anime",6,"isnet-anime","")
-			pchannel_choice.add("sam",7,"sam","")
-			pchannel_choice.add("birefnet-general",8,"birefnet-general","")
-			pchannel_choice.add("birefnet-cod",9,"birefnet-cod","")
-			pchannel_choice.add("birefnet-massive",10,"birefnet-massive","")
-			pchannel_choice.add("birefnet-portrait",11,"birefnet-portrait","")
-			pchannel_choice.add("birefnet-general-lite",12,"birefnet-general-lite","")
-			pchannel_choice.add("birefnet-hrsod",13,"birefnet-hrsod","")
-			pchannel_choice.add("birefnet-dis",14,"birefnet-dis","")
+			model_choice = Gimp.Choice.new()
+			model_choice.add("u2net",0,"u2net","")
+			model_choice.add("u2net_human_seg",1,"u2net_human_seg","")
+			model_choice.add("u2net_cloth_seg",2,"u2net_cloth_seg","")
+			model_choice.add("u2netp",3,"u2netp","")
+			model_choice.add("silueta",4,"silueta","")
+			model_choice.add("isnet-general-use",5,"isnet-general-use","")
+			model_choice.add("isnet-anime",6,"isnet-anime","")
+			model_choice.add("sam",7,"sam","")
+			model_choice.add("birefnet-general",8,"birefnet-general","")
+			model_choice.add("birefnet-cod",9,"birefnet-cod","")
+			model_choice.add("birefnet-massive",10,"birefnet-massive","")
+			model_choice.add("birefnet-portrait",11,"birefnet-portrait","")
+			model_choice.add("birefnet-general-lite",12,"birefnet-general-lite","")
+			model_choice.add("birefnet-hrsod",13,"birefnet-hrsod","")
+			model_choice.add("birefnet-dis",14,"birefnet-dis","")
 
 			procedure.add_choice_argument ("Model", _("Model"),
-                                           _("Model"), pchannel_choice,
+                                           _("Model"), model__choice,
                                            "u2net", GObject.ParamFlags.READWRITE)
 
 			return procedure
