@@ -147,10 +147,6 @@ class PythonRemoveBG(Gimp.PlugIn):
 				newlayer = Gimp.file_load_layer(run_mode,image,fileOut)
 				image.insert_layer(newlayer, None,-1)
 			
-			file = Gio.File.new_for_path(pngFile)
-			newLayer  = Gimp.file_load_layer(run_mode,image,fileOut)
-			image.insert_layer(newlayer, None,-1)
-
 			if asMask:
 				image.select_item(Gimp.ChannelOps.REPLACE, newlayer)
 				image.remove_layer(newlayer)
