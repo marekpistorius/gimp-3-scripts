@@ -16,6 +16,8 @@ from gi.repository import GLib
 from gi.repository import Gio
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
+from pathlib import Path
+
 import os, sys, string, tempfile, platform
 import subprocess
 
@@ -131,7 +133,7 @@ class PythonRemoveBG(Gimp.PlugIn):
 				pdb.file_jpeg_save(tmpImage, tmpDrawable, jpgFile, jpgFile, 0.95, 0, 1, 0, "", 0, 1, 0, 0)
 				pdb.gimp_image_delete(tmpImage)
 	
-			aiExe = "C:\\Program Files (x86)\\Rembg\\rembg.exe"
+			aiExe = Path("C:/Program Files (x86)/Rembg/rembg.exe")
 						
 			if AlphaMatting:
 				option = "-a -ae %d" % (aeValue)
