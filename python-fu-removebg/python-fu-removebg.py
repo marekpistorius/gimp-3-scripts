@@ -149,12 +149,12 @@ class PythonRemoveBG(Gimp.PlugIn):
 			
 			if asMask:
 				image.select_item(Gimp.ChannelOps.REPLACE, newlayer)
+				copyLayer = newlayer.copy()
 				image.remove_layer(newlayer)
-				copyLayer = Gimp.layer_copy(curLayer)
 				image.insert_layer(copyLayer,None, -1)
-				mask = copyLayer.create_mask(ADD_SELECTION_MASK)
+				mask = copyLayer.create_mask(Gimp.AddMaskType.SELECTION)
 				copyLayer.add_mask(mask)
-				Gimp.selection_none(image)
+				image.get_selection().none(image)
 
 			image.undo_group_end()
 			Gimp.displays_flush()
