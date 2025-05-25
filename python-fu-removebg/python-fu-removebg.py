@@ -68,7 +68,7 @@ class PythonRemoveBG(Gimp.PlugIn):
 			model_choice.add("birefnet-dis",14,"birefnet-dis","")
 
 			procedure.add_choice_argument ("Model", _("Model"),
-                                           _("Model"), model__choice,
+                                           _("Model"), model_choice,
                                            "u2net", GObject.ParamFlags.READWRITE)
 
 			return procedure
