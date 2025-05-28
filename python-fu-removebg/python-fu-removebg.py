@@ -41,7 +41,7 @@ class PythonRemoveBG(Gimp.PlugIn):
 			procedure.set_documentation (_("Remove Background AI"),
 										_("Remove Background AI"),
 										 name)
-			procedure.set_menu_label(_("RemoveBG.."))
+			procedure.set_menu_label(_("RemoveBG"))
 			procedure.set_attribution("MP",
 										"(c) GPL V3.0 or later",
 										"2024-2025")
