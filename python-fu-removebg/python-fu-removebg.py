@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# (C) 2024-2025 Marek Pistorius
+# (C) 2024-2026 Marek Pistorius
 # This file is part of gimp-python-fu-removebg .
 # gimp-python-fu-removebg is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 2 of the License, or (at your option) any later version.
 # gimp-python-fu-removebg is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -17,13 +17,42 @@ from gi.repository import Gio
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 from pathlib import Path
-
+from typing import Any, Callable, List, Optional, Tuple, Union
 import os, sys, string, tempfile, platform
 import subprocess
 
 def N_(message): return message
 def _(message): return GLib.dgettext(None, message)
 tupleModel = ("u2net","u2net_human_seg", "u2net_cloth_seg", "u2netp", "silueta", "isnet-general-use", "isnet-anime", "sam", "birefnet-general" ,"birefnet-general-lite", "birefnet-portrait", "birefnet-dis", "birefnet-hrsod", "birefnet-cod", "birefnet-massive" )
+
+REMBG_BASE_PATH = ""
+
+def find_rembg_install() -> Optional[Path]:
+
+	home = sys.exec_prefix
+
+	possible_paths = []
+	# Common installation paths
+	if sys.platform == "win32":
+		possible_paths = [
+			Path("C:/Program Files (x86)/RemBG/"),
+			Path("C:/Program Files/RemBG/"),
+		]
+
+	for path in possible_paths:
+		if path.is_dir():
+			return path
+
+	# Fallback to user-configured path if specified
+	if REMBG_BASE_PATH and (nik_path := Path(REMBG_BASE_PATH)).is_dir():
+		return nik_path
+
+	show_alert(
+	text="rembg installation path not found",
+		message="Please specify the correct installation path 'REMBG_BASE_PATH' in the script.",
+		)
+
+	return None
 
 class PythonRemoveBG(Gimp.PlugIn):
 		## GimpPlugIn virtual methods ##
@@ -133,7 +162,9 @@ class PythonRemoveBG(Gimp.PlugIn):
 				pdb.file_jpeg_save(tmpImage, tmpDrawable, jpgFile, jpgFile, 0.95, 0, 1, 0, "", 0, 1, 0, 0)
 				pdb.gimp_image_delete(tmpImage)
 	
-			aiExe = Path("C://Program Files (x86)/Rembg/rembg.exe")
+#			aiExe = Path("C://Program Files (x86)/Rembg/rembg.exe")
+			aiExe = str(find_rembg_install())
+			aiExe += "/rembg.exe"
 						
 			if AlphaMatting:
 				option = "-a -ae %d" % (aeValue)
