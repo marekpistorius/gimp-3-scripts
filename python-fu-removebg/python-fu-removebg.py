@@ -35,8 +35,8 @@ def find_rembg_install() -> Optional[Path]:
 	# Common installation paths
 	if sys.platform == "win32":
 		possible_paths = [
-			Path("C:/Program Files (x86)/RemBG/"),
-			Path("C:/Program Files/RemBG/"),
+			Path("C:/Program Files (x86)/Rembg/"),
+			Path("C:/Program Files/Rembg/"),
 		]
 
 	for path in possible_paths:
