@@ -65,7 +65,7 @@ def show_alert(text: str, message: str, parent=None) -> None:
         text=text,
     )
     dialog.format_secondary_text(message)
-    dialog.set_title(f"{PROC_NAME} v{VERSION}")
+    dialog.set_title(f"REMBG")
     dialog.run()
     dialog.destroy()
 
