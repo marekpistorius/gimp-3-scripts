@@ -54,6 +54,23 @@ def find_rembg_install() -> Optional[Path]:
 
 	return None
 
+def show_alert(text: str, message: str, parent=None) -> None:
+    """Popup a message dialog with the given text and message"""
+
+    dialog = Gtk.MessageDialog(
+        transient_for=parent,
+        flags=0,
+        message_type=Gtk.MessageType.ERROR,
+        buttons=Gtk.ButtonsType.CLOSE,
+        text=text,
+    )
+    dialog.format_secondary_text(message)
+    dialog.set_title(f"{PROC_NAME} v{VERSION}")
+    dialog.run()
+    dialog.destroy()
+
+
+
 class PythonRemoveBG(Gimp.PlugIn):
 		## GimpPlugIn virtual methods ##
 		def do_set_i18n(self, procname):
