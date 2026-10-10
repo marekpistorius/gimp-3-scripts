@@ -11,7 +11,7 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 from pathlib import Path
 from typing import Any, Callable, List, Optional, Tuple, Union
-import os, sys, string, tempfile, platform
+import sys
 gi.require_version('Gegl', '0.4')
 from gi.repository import Gegl
 
