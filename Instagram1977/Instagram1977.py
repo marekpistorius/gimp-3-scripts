@@ -74,8 +74,7 @@ class PythonInstagram1977(Gimp.PlugIn):
 			Gimp.context_set_foreground(wcolor)
 			img.select_rectangle(0, 0,0, w,h )
 			dimBorder = int( (w/100)*2 )
-			if dimBorder<5:
-				dimBorder=5
+			dimBorder = max(dimBorder,5)
 			Gimp.Selection.shrink(img, dimBorder)
 			Gimp.Selection.invert(img)
 			Wborder.edit_fill(Gimp.FillType.FOREGROUND)
@@ -88,9 +87,8 @@ class PythonInstagram1977(Gimp.PlugIn):
 			Gimp.context_set_foreground(bcolor)
 			img.select_rectangle( 0, 0,0, w,h )
 		
-			dimBorder=int( (w/100)*2 )
-			if dimBorder < 5:
-				dimBorder = 5
+			dimBorder = int( (w/100)*2 )
+			dimBorder = max(dimBorder,5)
 			Gimp.Selection.shrink(img, dimBorder)
 			Gimp.Selection.invert(img)
 			Bborder.edit_fill(Gimp.FillType.FOREGROUND)
